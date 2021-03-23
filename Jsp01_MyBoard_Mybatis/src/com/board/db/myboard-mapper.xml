@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="boardmapper">
+
+<!-- sql작성하면 됨 -->
+
+	<resultMap type="myBoardDto" id="myBoardMap">
+		<result property="seq" column="SEQ"/>
+		<result property="writer" column="WRITER"/>
+		<result property="title" column="TITLE"/>
+		<result property="content" column="CONTENT"/>
+		<result property="regdate" column="REGDATE"/>
+	</resultMap>
+
+<!-- 
+마이바티스(테이블)의 컬럼과 dto의 필드이름 같게 해줘야함
+다를경우 테이블의 SEQ를 resultMap으로 셋팅해준다
+ -->
+
+<!-- 전달받은게 없어서 파라미터 타입이 없다 -->
+<!-- com.board.dto.MyBoardDto를 config에서 별칭 정해준걸 가져왔다 -->
+<!--
+java.sql.SQLSyntaxErrorException: ORA-00911: invalid character
+ SQL문에 ; 넣으면 오류난다. 
+ -->
+	<select id="selectList" resultType="myBoardDto">
+		SELECT SEQ, WRITER, TITLE, CONTENT, REGDATE
+		FROM MYBOARD
+		ORDER BY SEQ DESC
+	</select>
+	
+<!-- dao에서 int타입의 seq보내줘서 넘어오는 값이 int라고 정해줘서 seq 받아줌 
+실행된 결과가 resultMap에 담겨서 리턴됨-->
+	<select id="selectOne" parameterType="int" resultMap="myBoardMap">
+		SELECT SEQ, WRITER, TITLE, CONTENT, REGDATE
+		FROM MYBOARD	
+		WHERE SEQ = #{seq}
+	</select>
+
+	<insert id="insert" parameterType="myBoardDto">
+		INSERT INTO MYBOARD
+		VALUES(MYBOARDSEQ.NEXTVAL, #{writer}, #{title}, #{content}, SYSDATE)
+	</insert>
+
+</mapper>

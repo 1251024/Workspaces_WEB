@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+
+	<h1>HOME</h1>
+	//web.xml:프로젝트 '설정' <br>
+	//배포 기술자 (deployment descriptor)<br>
+	//xml:eXtensible Markup Language(xmlns)<br>
+	//html : 태그가 정해짐<br>
+	//xml 파싱 하는 것도 배울예정<br>
+	//서블릿, 스프링에 많이 사용<br>
+	
+	<!-- 서버안데 똑같은 타입의 서블릿이 두개 생성됨 -->
+	<a href="hello.do?command=get">hello</a><!-- get방식으로 요청 --><!-- web.xml에 있는 Hello라는 서블릿 객체 생성 -->
+	<!--query string 변수 = 값 -->
+	
+	<br>
+	<form action="controller.do"method="post"><!-- post방식으로 요청/post방식은 form태그 --><!-- 클래스 Helloservlet에 있는 @annotation을 통해 서블릿 객체 생성 -->
+		<input type = "hidden"name="command"value="post">
+		<input type = "submit"value="hello">
+	</form>
+	
+	<!-- hello.do를 보내줘서 context-param 및 Hello의 Servlet이 출력된거고
+	 controller.do를 호출했으니 hello.do는 호출이안되서 그거 빼고 호출
+	 -->
+	
+</body>
+</html>

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<!-- 
+	configuration 설정파일이다 
+	.dtd는 무엇일까?
+	
+	순서대로 써야함
+	(properties?, settings?, typeAliases?, typeHandlers?, objectFactory?, objectWrapperFactory?, reflectorFactory?, plugins?, environments?, databaseIdProvider?, mappers?)
+	-->
+	
+  <properties resource="com/board/db/db.properties"></properties>
+  
+  <!-- select에 있는 패키지명 별칭 정해주기 -->
+  <typeAliases>
+  	<typeAlias type="com.board.dto.MyBoardDto" alias="myBoardDto"/>
+  </typeAliases>
+  
+  <environments default="development">
+    <environment id="development">
+      <transactionManager type="JDBC"/>
+      <dataSource type="POOLED">
+        <property name="driver" value="${driver}"/>
+        <property name="url" value="${url}"/>
+        <property name="username" value="${username}"/>
+        <property name="password" value="${password}"/>
+      </dataSource>
+    </environment>
+  </environments>
+  <!-- environment를 가지고 커넥션 객체를 만듦 -->
+        <!-- dataSource =  Connection 객체와 같음 , java와 데이터베이스와 연결-->
+        	<!-- driver 연결 -->
+			<!-- 계정연결 url, user, password db.properties에서 가져옴 -->
+  
+  <!-- mapper.xml에서 sql문을 종류별로 만들어서 넣을 수 있음 -->
+  <mappers>
+    <mapper resource="com/board/db/myboard-mapper.xml"/>
+  </mappers>
+</configuration>

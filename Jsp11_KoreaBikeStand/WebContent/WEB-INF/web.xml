@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd" id="WebApp_ID" version="4.0">
+  <display-name>Jsp11_KoreaBikeStand</display-name>
+  <welcome-file-list>
+    <welcome-file>index.html</welcome-file>
+    <welcome-file>index.htm</welcome-file>
+    <welcome-file>index.jsp</welcome-file>
+    <welcome-file>default.html</welcome-file>
+    <welcome-file>default.htm</welcome-file>
+    <welcome-file>default.jsp</welcome-file>
+  </welcome-file-list>
+  
+  <!-- 서블릿의 정보 설정해 주는 곳 -->
+  <servlet>
+  	<servlet-name>bike</servlet-name><!-- 서블릿 이름 명시 -->
+  	<servlet-class>com.bike.controller.BikeController</servlet-class><!-- 패키지.클래스 이름을 등록해줌 -->
+  </servlet>
+
+	<servlet-mapping>
+		<servlet-name>bike</servlet-name><!-- 서블릿의 name을 매핑 -->
+		<url-pattern>/bike.do</url-pattern><!-- /가 반드시 필요!(주소 뒤에 값이라서) -->
+		<!-- bike.do를 하면 서블릿 클래스의 경로를 찾아간다 -->
+	</servlet-mapping>
+</web-app>

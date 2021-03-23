@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+
+
+<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+
+<script type="text/javascript">
+
+//해당 페이지가 안뜨고 404면 해당페이지 경로를 못찾아서임
+//web.xml에서 웰컴파일을 바꾸거나, index파일을 만들어서 해당페이지를 호출하면 됨
+	function getParameterValues() {
+		var name = "name=" + encodeURIComponent($("#name").val());
+		var kor = "kor=" + $("#kor").val();
+		var eng = "eng=" + $("#eng").val();
+		var math = "math=" + $("#math").val();
+
+		return "?" + name + "&" + kor + "&" + eng + "&" + math;
+	}
+
+	$(function() {
+		$("#process").click(function() {
+			var queryString = getParameterValues();
+			//alert(queryString);
+			
+			//json-simple을 webcontent-web-inf-lib폴더에 넣는다
+
+			//동기화: 요청해서 응답될때까지 기다리는 것
+			//비동기 : 새로고침없이 내용만 바뀜 -클라이언트와 서버가 동기화 되지 않는다.
+			//Asynchronous Javascript And Xml : 비동기식 -화면이 응답되는게 아니라 데이터만 응답됨
+			//ajax : 클라이언트와 서버가 동기화하지 않게 요청하는 것
+			$.ajax({			
+				//url=통신할 서버(페이지, 파일)주소 
+				//score.do이름을 찾는것 =web.xml일 수도 있고, controller일 수도 있음
+				//queryString은 ?k=v형태
+				url:"score.do"+queryString, //비동기로 요청하고
+				
+				//제이쿼리가 컨트롤러에서 json 문자열 넘어온것을 
+				//문자열로 넘어오는것을 자동으로 파싱 json객체로 만들어줌
+				//dataType리턴타입지정안해주면 string으로 넘어옴
+				dataType: "json",			//통신에 성공했을때 리턴받는 값의 타입: dataType, data는 값을 보낼때 사용한다
+				success: function(msg){
+					//msg는 값 , json object타입
+					// msg ->{"name":name, "sum":sum, "avg":avg}
+					
+					//json객체.key
+					$("#result").html(decodeURIComponent(msg.name)+"의 총점:"+msg.sum+"\n평균 :"+msg.avg);
+					//값받는게 안되서 success
+					
+					
+				},
+				error:function(){
+					alert("통신실패");
+				}
+			});
+			
+		});
+
+	});
+	
+</script>
+
+</head>
+<body>
+
+
+	<h1>성적 처리 프로그램</h1>
+
+	이름 :<input type="text" id="name" />	<br /> 
+	국어 :<input type="text" id="kor" /><br /> 
+	영어 :<input type="text" id="eng" /><br />
+	수학 :<input type="text" id="math" />	<br />
+
+	<input type="button" id="process" value="성적처리" onclick="load();"/><br />
+
+	<div id="result"></div>
+
+
+
+</body>
+</html>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd" id="WebApp_ID" version="4.0">
+  <display-name>Jsp07_EL_JSTL</display-name>
+  <welcome-file-list>
+    <welcome-file>index.html</welcome-file>
+    <welcome-file>index.htm</welcome-file>
+    <welcome-file>index.jsp</welcome-file>
+    <welcome-file>default.html</welcome-file>
+    <welcome-file>default.htm</welcome-file>
+    <welcome-file>default.jsp</welcome-file>
+  </welcome-file-list>
+  
+  	<servlet>
+  		<servlet-name>el</servlet-name>
+  		<servlet-class>com.el.controller.ELController</servlet-class>
+  		<load-on-startup>1</load-on-startup><!-- 서버가 실행될때 서블릿이 같이 실행되는데, 몇번째로 실행할지 순서를 정해줄 수 있다. 숫자 번째로 실행 -->
+  	</servlet>
+	<servlet-mapping>
+		<servlet-name>el</servlet-name>
+  		<url-pattern>/controller.do</url-pattern>
+	</servlet-mapping>  
+  
+</web-app>
