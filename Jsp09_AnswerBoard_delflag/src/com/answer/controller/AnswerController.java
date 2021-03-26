@@ -74,7 +74,7 @@ public class AnswerController extends HttpServlet {
 			
 		}else if(command.equals("update")) {
 			int boardno = Integer.parseInt(request.getParameter("boardno"));
-			int result = biz.updateDto(boardno);
+			//int result = biz.updateDto(boardno);
 			
 		}
 	}

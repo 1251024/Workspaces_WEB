@@ -1,4 +1,6 @@
-package com.board.dao;
+/*
+ package com.board.dao;
+ 
 
 import static com.board.db.JDBCTemplate.*;//템플릿 임포트 필수!!
 
@@ -216,3 +218,4 @@ public class MyBoardDao_old {
 	}
 	
 }
+*/
