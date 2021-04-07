@@ -22,7 +22,6 @@ public class Util {
 					+ mdate.substring(6, 8)+" "	//일짜르고 공백 넣자
 					+ mdate.substring(8, 10)+":"//시간짜르자
 					+ mdate.substring(10)+":00";//10부터 마지막 다짜르자
-		
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy년MM월dd일 HH시mm분");//SimpleDateFormat: 날짜<->내가 원하는 형태로 변환해준다
 																			//어떤날짜값이 들어오던 "yyyy년MMd일 HH시mm분"형식으로 되돌리겠다.
 		Timestamp tm = Timestamp.valueOf(temp);		//String을 Timestamp값으로 변환한다->yyyy-MM-dd hh:mm:00 정해진 형식으로 가져와야함

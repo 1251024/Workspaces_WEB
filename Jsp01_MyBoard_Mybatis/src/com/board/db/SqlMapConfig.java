@@ -14,7 +14,7 @@ public class SqlMapConfig {
 	public SqlSessionFactory getSqlSessionFactory() {
 		
 		//경로일 때는 /를 사용한다.
-		String resource = "com/board/db/mybatis-config.xml";//마이파티스사용하려면 이게 필요
+		String resource = "com/board/db/mybatis-config.xml";//마이바티스사용하려면 이게 필요
 		//1. mybatis-config.xml 가져와서 
 		
 		try {
