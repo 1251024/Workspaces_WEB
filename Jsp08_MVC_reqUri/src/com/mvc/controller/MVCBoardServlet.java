@@ -1,6 +1,7 @@
 package com.mvc.controller;
 
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -15,16 +16,71 @@ import com.mvc.biz.MVCBoardBizImpl;
 import com.mvc.dto.MVCBoardDto;
 
 
-@WebServlet("/MVCBoardServlet")
+@WebServlet(urlPatterns={"/selectlist","/selectone"})//url pattern으로 여러개의 url을 정해줄 수 있음, 스프링도 메소드 형식으로 만들어준다
+
+/*
+ * Restful
+ * doGet()		-	read
+ * doPost()		-	create
+ * doPut()		-	update
+ * doDelete()	-	delete
+ */
+
+
 public class MVCBoardServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-    
-    public MVCBoardServlet() {
-        super();
+	private MVCBoardBiz biz;
+	
+   private void getRequestUri(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		request.setCharacterEncoding("UTF-8");
+		response.setContentType("text/html; charset=UTF-8");
+		
+		biz = new MVCBoardBizImpl();
+		
+		String command = request.getRequestURI();
+		System.out.println("["+ command+"]");
+		
+		if(command.endsWith("/selectlist")) {
+			doSelectList(request, response);
+		}else if(command.endsWith("/selectone")) {
+			doSelectOne(request, response);
+		}
+	   
+    	
     }
 
+	private void doSelectOne(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		//1.
+		int seq = Integer.parseInt(request.getParameter("seq"));
+		
+		//2.
+		MVCBoardDto dto =biz.selectOne(seq);
+		
+		//3.
+		request.setAttribute("dto", dto);
+		
+		//4.
+		dispatch(request, response, "mvcselect.jsp");
+	
+	}
+
+	private void doSelectList(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		//1.
+		//2.
+		List<MVCBoardDto> list= biz.selectList();
+		
+		//3.
+		request.setAttribute("list", list);
+		//4.
+		dispatch(request, response,"mvclist.jsp");
+	
+	}
+
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		getRequestUri(request,response);
+		
+		/*
 		request.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html; charset=UTF-8");
 		
@@ -39,7 +95,7 @@ public class MVCBoardServlet extends HttpServlet {
 			//3.
 			request.setAttribute("list", list);
 			//4.
-			dispatch(request, response,"mvclist.jsp");
+			dispatch(request, response,"mylist.jsp");
 		}else if(command.equals("select")) {
 			//1.
 			int seq = Integer.parseInt(request.getParameter("seq"));
@@ -128,13 +184,13 @@ public class MVCBoardServlet extends HttpServlet {
 				response.sendRedirect("mvc.do?command=insertform");
 			}
 		}
-	
+	*/
 
 	}
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-		doGet(request, response);
+		getRequestUri(request,response);
+		//doGet(request, response);
 
 	}
 
